@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminNS">
+    <resultMap id="adminResultMap" type="Admin">
+        <id property="AID" column="AID"></id>
+        <result property="PASSWORD" column="PASSWORD"></result>
+        <result property="LASTDATE" column="LASTDATE"></result>
+
+    </resultMap>
+    <!--update last date-->
+    <update id="doUpdateLastDate" parameterType="Admin">
+        UPDATE ADMIN SET LASTDATE=#{LASTDATE} WHERE AID=#{AID}
+    </update>
+   <!--login query operation-->
+    <select id="findLogin" parameterType="Admin" resultType="Admin">
+        SELECT AID, LASTDATE FROM ADMIN WHERE AID=#{AID} AND PASSWORD=#{PASSWORD}
+    </select>
+</mapper>

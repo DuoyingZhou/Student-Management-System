@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClassesNS">
+    <resultMap id="classesResultMap" type="Classes">
+        <id property="CLASSID" column="CLASSID"></id>
+        <result property="CLASSNAME" column="CLASSNAME"></result>
+        <result property="DESCRIPTION" column="DESCRIPTION"></result>
+        <collection property="STUDENTS" column="STUDENTID" javaType="java.util.List" ofType="Student"></collection>
+    </resultMap>
+    <!--data increasing-->
+    <insert id="doCreate" parameterType="Classes">
+        INSERT INTO CLASSES(CLASSNAME,DESCRIPTION) VALUES (#{CLASSNAME},#{DESCRIPTION})
+    </insert>
+
+    <!--find classname-->
+    <select id="findByCLASSNAME" parameterType="String" resultMap="classesResultMap">
+        SELECT CLASSID,CLASSNAME,DESCRIPTION FROM CLASSES WHERE CLASSNAME=#{CLASSNAME}
+    </select>
+
+    <!--find all classes-->
+    <select id="findAll" parameterType="java.util.List" resultMap="classesResultMap">
+        SELECT CLASSID,CLASSNAME,DESCRIPTION FROM CLASSES
+    </select>
+</mapper>
